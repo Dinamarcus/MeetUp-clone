@@ -501,32 +501,57 @@ video {
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
+.visible {
+  visibility: visible;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
 .block {
   display: block;
 }
-.-translate-y-48 {
-  --tw-translate-y: -12rem;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-24 {
+  height: 6rem;
+}
+.w-24 {
+  width: 6rem;
 }
 .-translate-y-20 {
   --tw-translate-y: -5rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+.translate-y-0 {
+  --tw-translate-y: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.justify-center {
+  justify-content: center;
 }
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
 }
+.rounded-full {
+  border-radius: 9999px;
+}
 .uppercase {
   text-transform: uppercase;
 }
-.transition-transform {
-  transition-property: transform;
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-100 {
+  opacity: 1;
+}
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -584,6 +609,9 @@ p {
     max-width: 42rem;
     width: 100%;
     margin: 0 auto;
+    height: auto;
+    transition: height 0.5s ease;
+    overflow: hidden; /* Ensure content is hidden when height is reduced */
 }
 .alerta {
     text-align: center;
@@ -1166,4 +1194,20 @@ aside .ubicacion {
 }
 aside img {
     display: block;
+}
+
+trix-editor {
+    display: block;
+    font-size: 1.2rem;
+    min-height: 20rem!important;
+    padding: 2rem;
+    word-break: break-word;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.mapa {
+    height: 400px;
+    width: 100%;   
+    border-radius: 1rem;
 }

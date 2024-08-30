@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import bcrypt from 'bcrypt-nodejs';
-import sequelize from "../config/db.js";
+import db from "../config/db.js";
 
-const Usuarios = sequelize.define("usuarios", {
+const Usuarios = db.define("usuarios", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -45,10 +45,8 @@ const Usuarios = sequelize.define("usuarios", {
 })
 
 //Metodo para comparar passwords
-Usuarios.prototype.validarPassword = {
-    function(password) {
-        return bcrypt.compareSync(password, this.password);
-    }
+Usuarios.prototype.validarPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
 }
 
 export default Usuarios;    

@@ -30,8 +30,6 @@ const crearNuevaCuenta = async (req, res) => {
         // Url de confirmacion
         const url = `http://${req.headers.host}/confirmar-cuenta/${usuario.email}`;
 
-
-
         // Enviar email de confirmacion
         await enviarEmail({
             usuario,
@@ -45,7 +43,7 @@ const crearNuevaCuenta = async (req, res) => {
         return res.redirect("/iniciar-sesion");
     } catch (e) {
         // Extraer mensajes de error de Sequelize
-        const mensajesErroresSequelize = e.errors.map(error => error.message);
+        const mensajesErroresSequelize = error.errors ? error.errors.map(err => err.message) : [];
 
         // Extraer mensajes de error de Express-Validator
         const mensajesErroresExpress = erroresExpress.array().map(error => error.msg);
@@ -60,6 +58,27 @@ const crearNuevaCuenta = async (req, res) => {
     }
 }
 
+// Confirma la suscripcion del usuario
+const confirmarCuenta = async (req, res, next) => {
+    // Verificar que el usuario existe
+    const usuario = await Usuarios.findOne({ where: { email: req.params.correo } });
+
+    // si no existe, redireccionamos
+    if (!usuario) {
+        req.flash("error", "No existe un usuario con ese correo");
+        res.redirect("/crear-cuenta");
+
+        return next();
+    }
+    
+    // si existe, actualizamos el campo activo y redireccionamos
+    usuario.activo = 1;
+    await usuario.save();
+
+    req.flash("exito", "Usuario confirmado correctamente");
+    return res.redirect("/iniciar-sesion");
+}
+
 const formIniciarSesion = (req, res) => {
     return res.render("iniciar-sesion", {
         nombrePagina: "Iniciar Sesión"
@@ -69,5 +88,6 @@ const formIniciarSesion = (req, res) => {
 export {
     formCrearCuenta,
     crearNuevaCuenta,
-    formIniciarSesion
+    formIniciarSesion,
+    confirmarCuenta
 }

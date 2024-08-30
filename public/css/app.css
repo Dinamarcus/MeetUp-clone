@@ -49,6 +49,9 @@ p {
     max-width: 42rem;
     width: 100%;
     margin: 0 auto;
+    height: auto;
+    transition: height 0.5s ease;
+    overflow: hidden; /* Ensure content is hidden when height is reduced */
 }
 .alerta {
     text-align: center;
@@ -631,4 +634,20 @@ aside .ubicacion {
 }
 aside img {
     display: block;
+}
+
+trix-editor {
+    display: block;
+    font-size: 1.2rem;
+    min-height: 20rem!important;
+    padding: 2rem;
+    word-break: break-word;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.mapa {
+    height: 400px;
+    width: 100%;   
+    border-radius: 1rem;
 }

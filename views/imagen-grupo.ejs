@@ -1,0 +1,18 @@
+<main class="contenedor contenedor-formularios no-padding">
+    <h1><%= nombrePagina %></h1>
+
+    <form method="POST" class="default-form" enctype="multipart/form-data">
+        <div class="campo justify-center">
+            <label for="imagen">Imagen</label>
+            <input type="file" name="imagen">
+            <% if (grupo.dataValues.imagen) { %>
+            <img src="/uploads/grupos/<%= grupo.dataValues.imagen %>" alt="Imagen de <%= grupo.dataValues.nombre %>"
+                class="ml-2 w-24 h-24 rounded-full">
+            <% } %>
+        </div>
+
+        <div class="campo enviar">
+            <input type="submit" value="Guardar Imagen" class="btn btn-rosa">
+        </div>
+    </form>
+</main>

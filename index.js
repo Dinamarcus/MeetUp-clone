@@ -7,8 +7,13 @@ import bodyParser from 'body-parser';
 import flash from 'connect-flash';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import passport from './config/passport.js';
 import router from './routes/index.js';
 import db from './config/db.js';
+import Grupos from './models/Grupos.js';
+import Categorias from './models/Categorias.js';
+import Usuarios from './models/Usuarios.js';
+import Meeti from './models/Meeti.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -43,6 +48,10 @@ app.use(session({
     saveUninitialized: false
 }));
 
+// Inicializar passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Habilitar EJS como template engine
 app.use(expressEjsLayouts);
 app.set("view engine", "ejs");
@@ -59,6 +68,10 @@ app.use((req, res, next) => {
 
     if (Object.keys(flashData).find(key => key === "datosRegistro")) {
         flashData.datosRegistro = flashData.datosRegistro.pop();
+    } else if (Object.keys(flashData).find(key => key === "datosGrupo")) {
+        flashData.datosGrupo = flashData.datosGrupo.pop();
+    } else if (Object.keys(flashData).find(key => key === "datosMeeti")) {
+        flashData.datosMeeti = flashData.datosMeeti.pop();
     }
 
     res.locals.flash = { ...flashData };
